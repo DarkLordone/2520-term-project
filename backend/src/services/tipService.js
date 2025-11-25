@@ -6,7 +6,7 @@ export default {
     // TODO: get ahold of the db using readDb();
      const db = await readDb()
     // TODO: return the tips from the db
-    return db.tips;
+    return db.tips; 
   },
 
   async create({ title, userId }) {
