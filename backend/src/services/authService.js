@@ -42,32 +42,32 @@ export default {
     };
   },
 
-    async login({ username, password }) {
-      // TODO: get ahold of the db using readDb();
-      const db = await readDb();
-      // TODO: check the database for a user with a matching username and password
-      const found = db.users.find(u => u.username === username && u.password === password);
-      // TODO: if there is no user:
-      //       - construct a new Error("Invalid username or password");
-      //       - set the statusCode of that error object to 401
-      //       - throw the err
-      if (!found) {
-        const err = new Error("Invalid username or password");
-        err.statusCode = 401;
-        throw err;
-      };
-      // TODO: otherwise, create a login token. I'll help you out with this one:
-      const token = jwt.sign({ userId: found.id, username: found.username }, JWT_SECRET, { expiresIn: "1h" })
-      // TODO:  return an object that contains 2 things:
-      //  - token
-      //  - user : { id: user.id, username: user.username, profilePicture: user.profilePicture }
-      return {
-        token,
-        user: {
-          id: found.id,
-          username: found.username,
-          profilePicture: found.profilePicture,
-        }
-      };
-    }
+  async login({ username, password }) {
+    // TODO: get ahold of the db using readDb();
+    const db = await readDb();
+    // TODO: check the database for a user with a matching username and password
+    const found = db.users.find(u => u.username === username && u.password === password);
+    // TODO: if there is no user:
+    //       - construct a new Error("Invalid username or password");
+    //       - set the statusCode of that error object to 401
+    //       - throw the err
+    if (!found) {
+      const err = new Error("Invalid username or password");
+      err.statusCode = 401;
+      throw err;
+    };
+    // TODO: otherwise, create a login token. I'll help you out with this one:
+    const token = jwt.sign({ userId: found.id, username: found.username }, JWT_SECRET, { expiresIn: "1h" })
+    // TODO:  return an object that contains 2 things:
+    //  - token
+    //  - user : { id: user.id, username: user.username, profilePicture: user.profilePicture }
+    return {
+      token,
+      user: {
+        id: found.id,
+        username: found.username,
+        profilePicture: found.profilePicture,
+      }
+    };
+  }
 }
